@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const jwtAuth = require('./lib/jwtAuth');
+const loginController   = require('./routes/loginController');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

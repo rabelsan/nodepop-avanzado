@@ -13,7 +13,7 @@ const i18n = require('./lib/i18nConfigure');
 conn.once('open', async () => {
   try {
 
-    const respuesta = await askUser(i18n.__('Are you sure you want to initialize the Data Base with test data?  (yes/no)'));
+    const respuesta = await askUser(i18n.__('Are you sure you want to initialize the Data Base with test data? (y/n) '));
 
     if (respuesta.toLowerCase() !== i18n.__('yes')) {
       console.log('Process aborted!');
@@ -25,6 +25,7 @@ conn.once('open', async () => {
 
     // close connection
     conn.close();
+    process.exit(0);
 
   } catch (err) {
     console.log('There was an error:', err);
@@ -51,19 +52,19 @@ async function initAdvertisements() {
       sale: false, 
       price: 12, 
       photo: 'images/guantes-bluegrass-manatee.jpg',
-      tags: ['guantes','globes','bicicleta','bicycle')]
+      tags: ['guantes','globes','bicicleta','bicycle']
     },
     { name: 'Casco Dexter Proton Negan', 
       sale: true, 
       price: 60, 
       photo: 'images/casco-Dexter-Proton-Negan.jpg',
-      tags: ['casco','helmet'),'integral','moto','motorbyke']
+      tags: ['casco','helmet','integral','moto','motorbyke']
     },
     { name: 'Armario dos puertas correderas', 
       sale: true, 
       price: 75, 
       photo: 'images/armario-2-puertas-correderas.jpeg',
-      tags: ['armario','wardrobe'),'dos puertas','two gates'),'corredera','sliding']
+      tags: ['armario','wardrobe','dos puertas','two gates','corredera','sliding']
     }
   ]);
   console.log(`${result.length} advertisements have been created.`);
@@ -77,7 +78,7 @@ async function initUsers() {
    // loading test documents
    // cargar los documentos iniciales
    console.log('Loading users...');
-   const result = await Usuario.insertMany([
+   const result = await User.insertMany([
     { email: 'user@example.com', password: await User.hashPassword('1234') },
     { email: 'rabelsan@gmail.com', password: await User.hashPassword('1234') },
    ]);
