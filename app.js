@@ -9,6 +9,7 @@ const loginController   = require('./routes/loginController');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var loginRouter = require('./routes/login');
 
 var app = express();
 
@@ -26,17 +27,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Setup i18n
+// As i18n configuration creates the cookie 'nodeapi-locale', 
+// it has to be initialized afer cookies middleware setup
+const i18n = require('./lib/i18nConfigure');
+app.use(i18n.init); // metemos un middleware a express
+
 /**
  *  Website routes
  */
 app.use('/', indexRouter);
+app.use('/changeLocale', require('./routes/changeLocale'));
 app.use('/users', usersRouter);
+app.use('/login', loginRouter);
+
 
 /**
 *   API routes
 **/
 app.post('/api/authenticate', loginController.postJWT);
-app.use('/api/ads', jwtAuth(), require('./routes/api/advertisements'));
+app.use('/api/anuncios', jwtAuth(), require('./routes/api/advertisements'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

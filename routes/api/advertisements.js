@@ -24,9 +24,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-/* GET /api/ads */
+/* GET /api/anuncios */
 /**
- * @api {GET} /api/ads?optionalQueryString List advertisements
+ * @api {GET} /api/anuncios?optionalQueryString List advertisements
  * @apiGroup Advertisements
  * @apiParam {queryString} precio. Price filter (<=n: ?price=-12, ?price=12, >=n: ?price=12-, >=n1<=n2: ?price=12-500) 
  * @apiParam {queryString} tag. Tag filter (?tag=tagFiler1, ?tag=tagFilter1%20tagFilter2...) 
@@ -42,7 +42,7 @@ const upload = multer({ storage: storage });
  * @apiSuccess {String} advertisements.name Ad title
  * @apiSuccess {Number} advertisements.price Ad price
  * @apiSuccess {String} advertisements.photo Ad image file path
- * @apiSuccessExample {json} Success  http://localhost:3000/api/ads?precio=13-&tag=trek%20gua&venta=false
+ * @apiSuccessExample {json} Success  http://localhost:3000/api/anuncios?precio=13-&tag=trek%20gua&venta=false
  *    HTTP/1.1 200 OK
  *    [{
  *      "sale": true,
@@ -63,27 +63,27 @@ const upload = multer({ storage: storage });
 router.get('/', async function(req, res, next) {
   try {
 
-    // http://localhost:3000/api/ads?precio=-12
-    // http://localhost:3000/api/ads?precio=12
-    // http://localhost:3000/api/ads?precio=12-
-    // http://localhost:3000/api/ads?precio=12-300
+    // http://localhost:3000/api/anuncios?precio=-12
+    // http://localhost:3000/api/anuncios?precio=12
+    // http://localhost:3000/api/anuncios?precio=12-
+    // http://localhost:3000/api/anuncios?precio=12-300
     const precio = req.query.precio;
-    // http://localhost:3000/api/ads?tag=bycicle%20trek
+    // http://localhost:3000/api/anuncios?tag=bycicle%20trek
     const tag = req.query.tag;
-    // http://localhost:3000/api/ads?venta=true
-    // http://localhost:3000/api/ads?venta=false
+    // http://localhost:3000/api/anuncios?venta=true
+    // http://localhost:3000/api/anuncios?venta=false
     const venta = req.query.venta;
 
-    // http://localhost:3000/api/ads?limit=2
+    // http://localhost:3000/api/anuncios?limit=2
     const limit = parseInt(req.query.limit || 10);
-    // http://localhost:3000/api/ads?skip=2&limit=10
+    // http://localhost:3000/api/anuncios?skip=2&limit=10
     const skip = parseInt(req.query.skip);
 
-    // http://localhost:3000/api/ads?sort=age
-    // http://localhost:3000/api/ads?sort=age name
+    // http://localhost:3000/api/anuncios?sort=age
+    // http://localhost:3000/api/anuncios?sort=age name
     const sort = req.query.sort;
 
-    // http://localhost:3000/api/ads?fields=age%20-_id
+    // http://localhost:3000/api/anuncios?fields=age%20-_id
     const fields = (req.query.fields) ? req.query.fields : '-__v'; 
     
     const filter = {};
@@ -119,9 +119,9 @@ router.get('/', async function(req, res, next) {
   }
 });
 
-/* GET /api/ads/<_id> */
+/* GET /api/anuncios/<_id> */
 /**
- * @api {GET} /api/ads/<_id> List advertisement (providing the URL <_id> exists)
+ * @api {GET} /api/anuncios/<_id> List advertisement (providing the URL <_id> exists)
  * @apiGroup Advertisements
  * @apiParam {urlParam} _id. Row id 
  * @apiSuccess {Object[]} advertisements. Advertisement id 
@@ -162,9 +162,9 @@ router.get('/:_id', async (req, res, next) => {
   }
 });
 
-/* POST /api/ads/upload */
+/* POST /api/anuncios/upload */
 /**
- * @api {POST} /api/ads/upload Create a new advertisement based on POST file/body parameters
+ * @api {POST} /api/anuncios/upload Create a new advertisement based on POST file/body parameters
  * @apiGroup Advertisements
  * @apiParam {Boolean} advertisements.sale Ad for sale/to buy
  * @apiParam {String} advertisements.tags Ad tags for searching
@@ -208,15 +208,15 @@ router.post('/upload', upload.single('photo'), async (req, res, next) => {
   }
 });
 
-/* PUT /api/ads/:_id */
+/* PUT /api/anuncios/:_id */
 /**
- * @api {PUT} /api/ads/<_id> Modify advertisement (providing the URL <_id> exists)
+ * @api {PUT} /api/anuncios/<_id> Modify advertisement (providing the URL <_id> exists)
  * @apiGroup Advertisements
  * @apiParam {Boolean} advertisements.sale Ad for sale/to buy OPTIONAL
  * @apiParam {String} advertisements.tags Ad tags for searching OPTIONAL
  * @apiParam {String} advertisements.name Ad title OPTIONAL
  * @apiParam {Number} advertisements.price Ad price OPTIONAL
- * @apiSuccessExample {json} Success PUT http://localhost:3000/api/ads/5f5b9b0df9d13e2d0907582c body: { name: "Casco NEGRO Dexter Proton Negan" }
+ * @apiSuccessExample {json} Success PUT http://localhost:3000/api/anuncios/5f5b9b0df9d13e2d0907582c body: { name: "Casco NEGRO Dexter Proton Negan" }
  *    HTTP/1.1 200 OK
  *    
   {
@@ -253,11 +253,11 @@ router.put('/:_id', async (req, res, next) => {
   }
 });
 
-/* DELETE /api/ads/:_id */
+/* DELETE /api/anuncios/:_id */
 /**
- * @api {DELETE} /api/ads/<_id> Delete advertisement (providing the URL <_id> exists) 
+ * @api {DELETE} /api/anuncios/<_id> Delete advertisement (providing the URL <_id> exists) 
  * @apiGroup Advertisements
- * @apiSuccessExample {json} Success DELETE http://localhost:3000/api/ads/5f5b9b0df9d13e2d0907582c
+ * @apiSuccessExample {json} Success DELETE http://localhost:3000/api/anuncios/5f5b9b0df9d13e2d0907582c
  *    HTTP/1.1 200 OK
  * @apiErrorExample {error} List error
  *    HTTP/1.1 500 Internal Server Error
