@@ -8,8 +8,6 @@ const jwtAuth = require('./lib/jwtAuth');
 const loginController   = require('./routes/loginController');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var loginRouter = require('./routes/login');
 
 var app = express();
 
@@ -38,9 +36,6 @@ app.use(i18n.init); // metemos un middleware a express
  */
 app.use('/', indexRouter);
 app.use('/changeLocale', require('./routes/changeLocale'));
-app.use('/users', usersRouter);
-app.use('/login', loginRouter);
-
 
 /**
 *   API routes

@@ -1,36 +1,50 @@
-<!DOCTYPE html>
-<html>
+<% include header.html %>
 
-<head>
-  <title><%= title %></title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <link rel='stylesheet' href='/stylesheets/index.css' />
-</head>
-
-<body>
-  <header>
-    <h1><%= title %></h1>
-    <p>Advertisements published</p>
-  </header>
-  <section>
-    <p><% ads.forEach (ad => { %></p>
-    <article class='container'>
-      <div class='content'>
-        <h2><%= ad.name %></h2>
-        <p><% if(ad.sale) { %></p>
-        <h3>For sale</h3>
-        <p><% } else { %></p>
-        <h3>To buy</h3>
-        <p><% } %></p>
-        <h3>Price: <%= ad.price %></h3>
-        <p><b>Tags: </b><%= ad.tags %></p>
+<header class="masthead">
+  <div class="container h-100">
+    <div class="row h-100">
+      <div class="col-lg-7 my-auto">
+        <div class="header-content mx-auto cabecera">
+          <p><%= __('Advertisements published') %></p>
+          <section>
+            <p><% ads.forEach (ad => { %></p>
+            <article class='container'>
+              <div class='content'>
+                <h3><%= ad.name %></h3>
+                <p><% if(ad.sale) { %></p>
+                <h3><%= __('For sale') %></h3>
+                <p><% } else { %></p>
+                <h3><%= __('To buy') %></h3>
+                <p><% } %></p>
+                <h3><%= __('Price:') %><b><%= ad.price %></b></h3>
+                <h3><%= __('Tags:') %><b><%= ad.tags %></b></h3>
+              </div>
+              <div class='img-frame'>
+                <img class='image' src='<%= ad.photo %>' alt=<%= ad.photo %>>
+              </div>
+            </article>
+            <p><% }) %></p>
+          </section>
+        </div>
       </div>
-      <div class='img-frame'>
-        <img class='image' src='<%= ad.photo %>' alt=<%= ad.photo %>>
+      <div class="col-lg-5 my-auto">
+        <div class="device-container">
+          <div class="device-mockup iphone6_plus portrait white">
+            <div class="device">
+              <div class="screen">
+                <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                <img src="img/demo-screen-1.jpg" class="img-fluid" alt="">
+              </div>
+              <div class="button">
+                <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </article>
-    <p><% }) %></p>
-  </section>
-</body>
+    </div>
+  </div>
+</header>
 
-</html>
+
+<% include foot.html %>
