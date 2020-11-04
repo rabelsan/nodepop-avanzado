@@ -7,31 +7,38 @@ const jwt = require('jsonwebtoken');
 
 class LoginController {
 
-  /**
-   * GET /login
-   */
-  // eslint-disable-next-line no-unused-vars
-  index(req, res, next) {
-    res.locals.error = '';
-    res.locals.email = '';
-    res.render('login');
+/* POST /api/authenticate */
+/**
+ * @api {POST} /api/authenticate Create a new JWT POST body parameters email and password
+ * @apiGroup Authentication
+ * @apiParam {String} email
+ * @apiParam {String} password
+ * @apiSuccessExample {json({ tokenJWT: tokenJWT })} Success  
+ *    HTTP/1.1 200 OK
+ *    
+  {
+    "tokenJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+                eyJfaWQiOiI1ZjlkYTk4MzNlMzAyMTMzNTZkOTdlMjEiLCJpYXQiOjE2MDQ1MTU3NjIsImV4cCI6MTYwNDUxNTc2N30.
+                YPoZWhnZxm1R3SK5Ei_xFB9_eXA073nYL-cBZfO4lrE"
   }
-
-  /**
-   * POST /api/authenticate
-   */
+ * @apiErrorExample {error} List error
+ *    HTTP/1.1 401 Unauthorized
+  {
+    "error": "invalid credentials"
+ }
+ */
   async postJWT(req, res, next) {
     try {
 
-      // recoger valores de entrada
+      // collect the body values
       const email = req.body.email;
       const password = req.body.password;
-
-      // buscar el usuario en la BD
+      
+      // retrieve the user from the BD
       const user = await User.findOne({ email: email });
 
-      // si no existe el usuario o la password no coincide
-      // mostrar un error
+      // if does not exits the user or the password is wrong ->
+      // return error
       if (!user || !(await bcrypt.compare(password, user.password )) ) {
         // responder un error de autenticación en JSON
         const error = new Error('invalid credentials');
@@ -40,13 +47,11 @@ class LoginController {
         return;
       }
 
-      // si el usuario existe y la password es correcta
-
-      // crear un JWT
+      // if does exits the user or the password is right ->
+      // create a new JWT 
       jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '2d'}, (err, tokenJWT) => {
         if (err) return next(err);
-
-        // responder
+        // replay
         res.json({ tokenJWT: tokenJWT });
       });
 
@@ -56,21 +61,6 @@ class LoginController {
     }
 
   }
-
-  /**
-   * GET /logout
-   */
-  logout(req, res, next) {
-    req.session.regenerate(err => {
-      if (err) {
-        next(err);
-        return;
-      }
-      // redirigir a la home
-      res.redirect('/');
-    })
-  }
-
 }
 
 module.exports = new LoginController();

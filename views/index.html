@@ -4,20 +4,20 @@
   <div class="container h-100">
     <div class="row h-100">
       <div class="col-lg-7 my-auto">
-        <div class="header-content mx-auto cabecera">
+        <div class="header-content mx-auto">
           <section>
-            <p><%= __('Advertisements published') %></p>
+            <h3><%= __('Advertisements published') %></h3>
             <p><% ads.forEach (ad => { %></p>
             <article class='container'>
               <div class='content'>
-                <h3><%= ad.name %></h3>
+                <h4><%= ad.name %></h4>
                 <p><% if(ad.sale) { %></p>
-                <h3><%= __('For sale') %></h3>
+                <h4><%= __('For sale') %></h4>
                 <p><% } else { %></p>
-                <h3><%= __('To buy') %></h3>
+                <h4><%= __('To buy') %></h4>
                 <p><% } %></p>
-                <h3><%= __('Price:') %><b><%= ad.price %></b></h3>
-                <h3><%= __('Tags:') %><b><%= ad.tags %></b></h3>
+                <h4><%= __('Price:') %><b><%= ad.price %></b></h4>
+                <h5><%= __('Tags:') %><%= ad.tags %></h5>
               </div>
               <div class='img-frame'>
                 <img class='image' src='<%= ad.photo %>' alt=<%= ad.photo %>>
