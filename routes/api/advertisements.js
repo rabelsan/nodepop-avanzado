@@ -28,6 +28,18 @@ const upload = multer({ storage: storage });
 /**
  * @api {GET} /api/anuncios?optionalQueryString List advertisements
  * @apiGroup Advertisements
+ * @apiParam JWT_Authorization_required_option_1
+ *    GET /api/anuncios (body: {token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+ *          eyJfaWQiOiI1ZjlkYTk4MzNlMzAyMTMzNTZkOTdlMjEiLCJpYXQiOjE2MDQ1MTg2NTQsImV4cCI6MTYwNDY5MTQ1NH0.
+ *          eoF7TvqS0Ray0ZOyC9T-EMuXpr0pXkAcLB3zu_fa3vk)
+ * @apiParam JWT_Authorization_required_option_2
+ *    GET /api/aununcios (header: 
+ *          {key: "Authorization" value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9. eyJfaWQiOiI1ZjlkYTk4MzNlMzAyMTMzNTZkOTdlMjEiLCJpYXQiOjE2MDQ1MTg2NTQsImV4cCI6MTYwNDY5MTQ1NH0. eoF7TvqS0Ray0ZOyC9T-EMuXpr0pXkAcLB3zu_fa3vk}
+ * @apiParam JWT_Authorization_required_option_3
+ *    GET /api/anuncios (query string) 
+ *          api/authenticate?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9. 
+ *          eyJfaWQiOiI1ZjlkYTk4MzNlMzAyMTMzNTZkOTdlMjEiLCJpYXQiOjE2MDQ1MTg2NTQsImV4cCI6MTYwNDY5MTQ1NH0. 
+ *          eoF7TvqS0Ray0ZOyC9T-EMuXpr0pXkAcLB3zu_fa3vk
  * @apiParam {queryString} precio. Price filter (<=n: ?price=-12, ?price=12, >=n: ?price=12-, >=n1<=n2: ?price=12-500) 
  * @apiParam {queryString} tag. Tag filter (?tag=tagFiler1, ?tag=tagFilter1%20tagFilter2...) 
  * @apiparam {queryString} venta. Sale/Buy filter (?venta=true, ?venta=false) 
@@ -35,7 +47,7 @@ const upload = multer({ storage: storage });
  * @apiparam {queryString} skip. Query skips the N first row (?skip=2) 
  * @apiparam {queryString} sort. Query sort method (?sort=sale&20price) 
  * @apiparam {queryString} fields. Query skips the N first row (?fields=name, ?fields=name%20price-_id) 
-  * @apiSuccess {Object[]} advertisements. Advertisement's list
+ * @apiSuccess {Object[]} advertisements. Advertisement's list
  * @apiSuccess {Boolean} advertisements.sale Ad for sale/to buy
  * @apiSuccess {String} advertisements.tags Ad tags for searching
  * @apiSuccess {String} advertisemnts._id Ad id
@@ -58,6 +70,8 @@ const upload = multer({ storage: storage });
  *      "photo": "images/bike-trek-madone-SLR7.jpg"
  *    }]
  * @apiErrorExample {json} List error
+ *    HTTP/1.1 401 Unauthorized { "error": "no token provided" }
+ *    HTTP/1.1 401 Unauthorized { "error": "jwt expired" }
  *    HTTP/1.1 500 Internal Server Error
  */
 router.get('/', async function(req, res, next) {

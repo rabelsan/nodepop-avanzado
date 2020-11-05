@@ -45,10 +45,42 @@ npm run dev
 
 ## API Methods
 
+### Authentication
+
+POST /api/authenticate {body: email:"example@domain.com", password: "xxxx"}
+
+If the user credentials (email & password), are correct, it will return a valid JWT
+Otherwise it will return an error
+
+HTTP/1.1 200 OK
+  {
+    "tokenJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+                eyJfaWQiOiI1ZjlkYTk4MzNlMzAyMTMzNTZkOTdlMjEiLCJpYXQiOjE2MDQ1MTU3NjIsImV4cCI6MTYwNDUxNTc2N30.
+                YPoZWhnZxm1R3SK5Ei_xFB9_eXA073nYL-cBZfO4lrE"
+  }
+
 ### List of advertisements
 
-GET /api/ads
+GET /api/anuncios
 
+  JWT Authorization parameter required. Options:
+  
+  GET /api/anuncios (body:
+        {token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+        eyJfaWQiOiI1ZjlkYTk4MzNlMzAyMTMzNTZkOTdlMjEiLCJpYXQiOjE2MDQ1MTg2NTQsImV4cCI6MTYwNDY5MTQ1NH0.
+        eoF7TvqS0Ray0ZOyC9T-EMuXpr0pXkAcLB3zu_fa3vk)
+  
+  GET /api/aununcios (header: 
+        {key: "Authorization" value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+        eyJfaWQiOiI1ZjlkYTk4MzNlMzAyMTMzNTZkOTdlMjEiLCJpYXQiOjE2MDQ1MTg2NTQsImV4cCI6MTYwNDY5MTQ1NH0.
+        eoF7TvqS0Ray0ZOyC9T-EMuXpr0pXkAcLB3zu_fa3vk}
+  
+  GET /api/anuncios (query string)
+        api/authenticate?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+        eyJfaWQiOiI1ZjlkYTk4MzNlMzAyMTMzNTZkOTdlMjEiLCJpYXQiOjE2MDQ1MTg2NTQsImV4cCI6MTYwNDY5MTQ1NH0.
+        eoF7TvqS0Ray0ZOyC9T-EMuXpr0pXkAcLB3zu_fa3vk
+
+  HTTP/1.1 200 OK 
   [
     {
       "sale": true,
@@ -64,26 +96,36 @@ GET /api/ads
       "photo": "images/bike-trek-madone-SLR7.jpg"
     }
   ]
+  
+  HTTP/1.1 401 Unauthorized
+    {
+      "error": "no token provided"
+    }
+  
+  HTTP/1.1 401 Unauthorized 
+    {
+      "error": "jwt expired"
+    } 
 
 Example filters:
 
-* http://localhost:3000/api/ads?price=20
-* http://localhost:3000/api/ads?price=-20
-* http://localhost:3000/api/ads?price=20-
-* http://localhost:3000/api/ads?price=20-1500
-* http://localhost:3000/api/ads?tag=bike
-* http://localhost:3000/api/ads?tag=bike%20trek
-* http://localhost:3000/api/ads?sale=true
-* http://localhost:3000/api/ads?price=-6000&tag=bike%20trek&sale=true
-* http://localhost:3000/api/ads?limit=2
-* http://localhost:3000/api/ads?skip=20&limit=10
-* http://localhost:3000/api/ads?sort=name
-* http://localhost:3000/api/ads?sort=name%20price
-* <http://localhost:3000/api/ads?fields=name%20-_id> (Only name filed excluding the _id)
+* http://localhost:3000/api/anuncios?price=20
+* http://localhost:3000/api/anuncios?price=-20
+* http://localhost:3000/api/anuncios?price=20-
+* http://localhost:3000/api/anuncios?price=20-1500
+* http://localhost:3000/api/anuncios?tag=bike
+* http://localhost:3000/api/anuncios?tag=bike%20trek
+* http://localhost:3000/api/anuncios?sale=true
+* http://localhost:3000/api/anuncios?price=-6000&tag=bike%20trek&sale=true
+* http://localhost:3000/api/anuncios?limit=2
+* http://localhost:3000/api/anuncios?skip=20&limit=10
+* http://localhost:3000/api/anuncios?sort=name
+* http://localhost:3000/api/anuncios?sort=name%20price
+* <http://localhost:3000/api/anuncios?fields=name%20-_id> (Only name filed excluding the _id)
 
 ### Retrieves one advertisement
 
-GET /api/ads/_id
+GET /api/anuncios/_id
 
   {
     "result": {
@@ -103,7 +145,7 @@ GET /api/ads/_id
 
 ### Create advertisement
 
-POST /api/ads/upload file: {'photo=../casco-Dexter-Proton-Negan.jpg'}
+POST /api/anuncios/upload file: {'photo=../casco-Dexter-Proton-Negan.jpg'}
                      body: { name: 'casco-Dexter-Proton-Negan', sale: 'true', price: '60', tags: [ 'casco', 'moto' ]}
   
   {
@@ -123,7 +165,7 @@ POST /api/ads/upload file: {'photo=../casco-Dexter-Proton-Negan.jpg'}
 
 ### Update advertisement
 
-PUT /api/ads/<_id> body: { name: "Casco NEGRO Dexter Proton Negan" }
+PUT /api/anuncios/<_id> body: { name: "Casco NEGRO Dexter Proton Negan" }
 
   {
     "result": {
@@ -143,7 +185,7 @@ PUT /api/ads/<_id> body: { name: "Casco NEGRO Dexter Proton Negan" }
 
 ### Delete advertisement
 
-DELETE /api/ads/<_id>
+DELETE /api/anuncios/<_id>
 
 Returns: HTTPCode 200
 

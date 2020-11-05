@@ -1,13 +1,13 @@
 [
   {
     "type": "DELETE",
-    "url": "/api/ads/<_id>",
+    "url": "/api/anuncios/<_id>",
     "title": "Delete advertisement (providing the URL <_id> exists)",
     "group": "Advertisements",
     "success": {
       "examples": [
         {
-          "title": "Success DELETE http://localhost:3000/api/ads/5f5b9b0df9d13e2d0907582c",
+          "title": "Success DELETE http://localhost:3000/api/anuncios/5f5b9b0df9d13e2d0907582c",
           "content": "HTTP/1.1 200 OK",
           "type": "json"
         }
@@ -23,18 +23,36 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/api/advertisements.js",
+    "filename": "routes/api/advertisements.js",
     "groupTitle": "Advertisements",
-    "name": "DeleteApiAds_id"
+    "name": "DeleteApiAnuncios_id"
   },
   {
     "type": "GET",
-    "url": "/api/ads?optionalQueryString",
+    "url": "/api/anuncios?optionalQueryString",
     "title": "List advertisements",
     "group": "Advertisements",
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "JWT_Authorization_required_option_1",
+            "description": "<p>GET /api/anuncios (body: {token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9. eyJfaWQiOiI1ZjlkYTk4MzNlMzAyMTMzNTZkOTdlMjEiLCJpYXQiOjE2MDQ1MTg2NTQsImV4cCI6MTYwNDY5MTQ1NH0. eoF7TvqS0Ray0ZOyC9T-EMuXpr0pXkAcLB3zu_fa3vk)</p>"
+          },
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "JWT_Authorization_required_option_2",
+            "description": "<p>GET /api/aununcios (header: {key: &quot;Authorization&quot; value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9. eyJfaWQiOiI1ZjlkYTk4MzNlMzAyMTMzNTZkOTdlMjEiLCJpYXQiOjE2MDQ1MTg2NTQsImV4cCI6MTYwNDY5MTQ1NH0. eoF7TvqS0Ray0ZOyC9T-EMuXpr0pXkAcLB3zu_fa3vk}</p>"
+          },
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "JWT_Authorization_required_option_3",
+            "description": "<p>GET /api/anuncios (query string) api/authenticate?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9. eyJfaWQiOiI1ZjlkYTk4MzNlMzAyMTMzNTZkOTdlMjEiLCJpYXQiOjE2MDQ1MTg2NTQsImV4cCI6MTYwNDY5MTQ1NH0. eoF7TvqS0Ray0ZOyC9T-EMuXpr0pXkAcLB3zu_fa3vk</p>"
+          },
           {
             "group": "Parameter",
             "type": "queryString",
@@ -143,7 +161,7 @@
       },
       "examples": [
         {
-          "title": "Success  http://localhost:3000/api/ads?precio=13-&tag=trek%20gua&venta=false",
+          "title": "Success  http://localhost:3000/api/anuncios?precio=13-&tag=trek%20gua&venta=false",
           "content": "HTTP/1.1 200 OK\n[{\n  \"sale\": true,\n    \"tags\": [\n      \"bicicletas\",\n      \"bycicles\",\n      \"trek\",\n      \"madone\"\n    ],\n  \"_id\": \"5f5a6ae91be10bf7d4a1956a\",\n  \"name\": \"Trek Madone SLR7\",\n  \"price\": 5800,\n  \"photo\": \"images/bike-trek-madone-SLR7.jpg\"\n}]",
           "type": "json"
         }
@@ -153,19 +171,19 @@
       "examples": [
         {
           "title": "List error",
-          "content": "HTTP/1.1 500 Internal Server Error",
+          "content": "HTTP/1.1 401 Unauthorized { \"error\": \"no token provided\" }\nHTTP/1.1 401 Unauthorized { \"error\": \"jwt expired\" }\nHTTP/1.1 500 Internal Server Error",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/api/advertisements.js",
+    "filename": "routes/api/advertisements.js",
     "groupTitle": "Advertisements",
-    "name": "GetApiAdsOptionalquerystring"
+    "name": "GetApiAnunciosOptionalquerystring"
   },
   {
     "type": "GET",
-    "url": "/api/ads/<_id>",
+    "url": "/api/anuncios/<_id>",
     "title": "List advertisement (providing the URL <_id> exists)",
     "group": "Advertisements",
     "parameter": {
@@ -246,13 +264,13 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/api/advertisements.js",
+    "filename": "routes/api/advertisements.js",
     "groupTitle": "Advertisements",
-    "name": "GetApiAds_id"
+    "name": "GetApiAnuncios_id"
   },
   {
     "type": "POST",
-    "url": "/api/ads/upload",
+    "url": "/api/anuncios/upload",
     "title": "Create a new advertisement based on POST file/body parameters",
     "group": "Advertisements",
     "parameter": {
@@ -315,13 +333,13 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/api/advertisements.js",
+    "filename": "routes/api/advertisements.js",
     "groupTitle": "Advertisements",
-    "name": "PostApiAdsUpload"
+    "name": "PostApiAnunciosUpload"
   },
   {
     "type": "PUT",
-    "url": "/api/ads/<_id>",
+    "url": "/api/anuncios/<_id>",
     "title": "Modify advertisement (providing the URL <_id> exists)",
     "group": "Advertisements",
     "parameter": {
@@ -361,7 +379,7 @@
     "success": {
       "examples": [
         {
-          "title": "Success PUT http://localhost:3000/api/ads/5f5b9b0df9d13e2d0907582c body: { name: \"Casco NEGRO Dexter Proton Negan\" }",
+          "title": "Success PUT http://localhost:3000/api/anuncios/5f5b9b0df9d13e2d0907582c body: { name: \"Casco NEGRO Dexter Proton Negan\" }",
           "content": " HTTP/1.1 200 OK\n \n{\n  \"result\": {\n      \"sale\": true,\n      \"tags\": [\n          \"casco\",\n          \"moto\"\n      ],\n      \"_id\": \"5f5b9b0df9d13e2d0907582c\",\n      \"name\": \"Casco NEGRO Dexter Proton Negan\",\n      \"price\": 60,\n      \"photo\": \"images/ad_27942a04-233f-428a-905a-a793d2c847d3_casco-Dexter-Proton-Negan.jpg\",\n      \"__v\": 0\n  }\n}",
           "type": "json"
         }
@@ -377,8 +395,8 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/api/advertisements.js",
+    "filename": "routes/api/advertisements.js",
     "groupTitle": "Advertisements",
-    "name": "PutApiAds_id"
+    "name": "PutApiAnuncios_id"
   }
 ]
