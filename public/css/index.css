@@ -18,8 +18,13 @@
 }
 
 .img-frame {
-    height: 35vw;
-    width: 45vw;
+    height: 30vw;
+    width: 40vw;
+}
+
+.img-frame-thumb {
+    height: 100px;
+    width: 100px;
 }
 
 .image {

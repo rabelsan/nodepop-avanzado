@@ -1,9 +1,12 @@
+'use strict';
+
 /* eslint-disable no-undef */
 var express = require('express');
 const multer = require('multer');
 var router = express.Router();
 const Advertisement = require('../../models/Advertisement');
 const lib = require('../../lib/utils.js');
+const thumbClient = require ('../../microservices/thumbClient');
 
 //uuid: Package For the creation of RFC4122 UUIDs
 // Sample ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
@@ -20,6 +23,8 @@ const storage = multer.diskStorage({
   filename: function(req, file, cb) {
     const myFilename = `ad_${uuidv4()}_${file.originalname}`;
     cb(null, myFilename);
+    // invoke the thumbClient microservice
+    thumbClient(publicPath, imgFolder, myFilename);
   }
 });
 const upload = multer({ storage: storage });
@@ -208,7 +213,7 @@ router.get('/:_id', async (req, res, next) => {
 router.post('/upload', upload.single('photo'), async (req, res, next) => {
   try {
     const adData = req.body;
-    adData.photo = imgFolder+req.file.filename;
+    adData.photo = req.file.filename;
 
     // create the document in memory
     const advertisement = new Advertisement(adData);
@@ -287,13 +292,19 @@ router.delete('/:_id', async (req, res, next) => {
     const advertisement = await Advertisement.findOne({ _id: _id});
     const fs = require('fs')
     await Advertisement.deleteOne({ _id: _id });
-    fs.unlink(publicPath+advertisement.photo, (err) => {
+    fs.unlink(publicPath+imgFolder+advertisement.photo, (err) => {
       if (err) {
         console.error(err.message);
         return
       }
     })
-    
+    fs.unlink(publicPath+imgFolder+'thumb_'+advertisement.photo, (err) => {
+      if (err) {
+        console.error(err.message);
+        return
+      }
+    })
+
     res.json();
   } catch (err) {
     next(err);

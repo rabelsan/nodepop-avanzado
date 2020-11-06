@@ -1,3 +1,4 @@
 apidocTemplate/
 node_modules/
+microservices/logs/
 .env

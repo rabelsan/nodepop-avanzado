@@ -18,9 +18,10 @@
                 <p><% } %></p>
                 <h4><%= __('Price:') %><b><%= ad.price %></b></h4>
                 <h5><%= __('Tags:') %><%= ad.tags %></h5>
+                <img class='im-frame-thumb' src='<%= imgFolder+'thumb_'+ad.photo %>' alt=<%= 'thumb_'+ad.photo %>>
               </div>
               <div class='img-frame'>
-                <img class='image' src='<%= ad.photo %>' alt=<%= ad.photo %>>
+                <img class='image' src='<%= imgFolder+ad.photo %>' alt=<%= ad.photo %>>
               </div>
             </article>
             <p><% }) %></p>

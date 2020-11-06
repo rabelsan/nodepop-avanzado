@@ -45,25 +45,25 @@ async function initAdvertisements() {
     { name: 'Trek Madone SLR7', 
       sale: true, 
       price: 5000, 
-      photo: 'images/bike-trek-madone-SLR7.jpg',
+      photo: 'bike-trek-madone-SLR7.jpg',
       tags: ['bicicleta','bicycle','Trek','Madone']
     },
     { name: 'Guantes Bluegrass Manatee', 
       sale: false, 
       price: 12, 
-      photo: 'images/guantes-bluegrass-manatee.jpg',
+      photo: 'guantes-bluegrass-manatee.jpg',
       tags: ['guantes','globes','bicicleta','bicycle']
     },
     { name: 'Casco Dexter Proton Negan', 
       sale: true, 
       price: 60, 
-      photo: 'images/casco-Dexter-Proton-Negan.jpg',
+      photo: 'casco-Dexter-Proton-Negan.jpg',
       tags: ['casco','helmet','integral','moto','motorbyke']
     },
     { name: 'Armario dos puertas correderas', 
       sale: true, 
       price: 75, 
-      photo: 'images/armario-2-puertas-correderas.jpeg',
+      photo: 'armario-2-puertas-correderas.jpeg',
       tags: ['armario','wardrobe','dos puertas','two gates','corredera','sliding']
     }
   ]);

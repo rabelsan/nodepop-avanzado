@@ -1,14 +1,14 @@
 <h1 align="center">Welcome to Nodepop: the tiny Wallapop 👋</h1>
 <p>
-  <a href="https://github.com/rabelsan/nodepop" target="_blank">
-    <img alt="Version" src="https://img.shields.io/npm/v/@rabelsan/nodepop.svg">
+  <a href="https://github.com/rabelsan/nodepop-avanzado" target="_blank">
+    <img alt="Version" src="https://img.shields.io/npm/v/@rabelsan/nodepop-avanzado.svg">
   </a>
 </p>
 
 ## Install
 
 ```sh
-npm install @rabelsan/nodepop
+npm install @rabelsan/nodepop-avanzado && pm2 reload ecosystem.config.js --env production
 ```
 
 ## Configure environment variables

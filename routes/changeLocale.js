@@ -1,3 +1,5 @@
+'use strict';
+
 /* eslint-disable no-undef */
 var express = require('express');
 var router = express.Router();
