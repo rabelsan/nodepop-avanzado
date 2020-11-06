@@ -43,6 +43,12 @@ npm start
 npm run dev
 ```
 
+## Test start
+
+```sh
+npm test
+```
+
 ## Microservices
 
 ### Responder: thumbService
