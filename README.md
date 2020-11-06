@@ -43,6 +43,39 @@ npm start
 npm run dev
 ```
 
+## Microservices
+
+### Responder: thumbService
+
+  This service generates, for a source image, a thumbnail file (format 100x100).
+  If not errors returned, it will create a new file in the same folder adding the prefix "thumb_".
+
+  ```sh
+  // microservice declaration
+  const thumbResponder = new cote.Responder({name: 'Thumbnail Service'});
+
+  // microservice logic
+  thumbResponder.on('generate thumbnail', (req, done) => {
+    thumbnail(req.publicPath, req.imgFolder, req.img);
+    done('Thumbnail file created: '+req.publicPath+req.imgFolder+'thumb_'+req.img);
+  });
+  ```
+
+### Client: thumbClient
+
+  The client sends as parameters a public root folder, an image container folder and the file name.
+  
+  ```sh
+  const thumbClient = new cote.Requester({ name: 'Thumbnail Client' });
+    thumbClient.send({ 
+        type: 'generate thumbnail', 
+        publicPath: path, 
+        imgFolder: folder, 
+        img: photo }, result => {
+        console.log(result);
+      });
+  ```
+
 ## API Methods
 
 ### Authentication
