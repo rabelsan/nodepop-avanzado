@@ -5,6 +5,12 @@
   </a>
 </p>
 
+## BONUS PACK
+
+```sh
+npm install @rabelsan\roman-decimal-converter
+```
+
 ## Install
 
 ```sh
