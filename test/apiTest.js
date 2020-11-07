@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-undef */
 
 require('dotenv').config(); // load .env in process.env
 
@@ -98,7 +99,7 @@ function onListening() {
 */
 
 // A valid JWT required for testing !!!
-var JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmE1MGEyN2RmMzI5MTRhZDM2ZTRhMGIiLCJpYXQiOjE2MDQ2Nzk3OTEsImV4cCI6MTYwNDg1MjU5MX0.CYShGzovVn04REhurUbNwjwmaefUBYjIyS2fjYCbvO4';
+// review .env variable JWT_TESTING
 
 //TEST /api/anuncios
 //without JWT
@@ -114,7 +115,7 @@ request(app)
 
 //with JWT
 request(app)
-  .get('/api/anuncios?token='+JWT)
+  .get('/api/anuncios?token='+process.env.JWT_TESTING)
   .expect('Content-Type', 'application/json; charset=utf-8')
   .expect(200)
   .end(function(err, res) {
@@ -129,7 +130,7 @@ request(app)
   
   //TEST /api/anuncios/:_id?token=JWT
   request(app)
-  .get('/api/anuncios/5fa50a26df32914ad36e4a10?token='+JWT)
+  .get('/api/anuncios/5fa50a26df32914ad36e4a10?token='+process.env.JWT_TESTING)
   .expect('Content-Type', 'application/json; charset=utf-8')
   .expect(200)
   .end(function(err, res) {
@@ -149,7 +150,7 @@ request(app)
     try {
       var adv = await Advertisement.findOne();
       request(app)
-        .get('/api/anuncios/'+adv._id+'?token='+JWT)
+        .get('/api/anuncios/'+adv._id+'?token='+process.env.JWT_TESTING)
         .expect('Content-Type', 'application/json; charset=utf-8')
         .expect(200)
         .end(function(err, res) {
