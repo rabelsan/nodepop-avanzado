@@ -107,8 +107,9 @@ request(app)
   .expect('Content-Type', 'application/json; charset=utf-8')
   .expect(200)
   .end(function(err, res) {
-    console.log('------ TEST GET /api/anuncios (WHITHOUT token JWT) ------');
+    console.group('------ TEST GET /api/anuncios (WHITHOUT token JWT) ------');
     if (err) console.log('*** ERROR => ', err.message);
+    console.groupEnd();
 });
 
 //with JWT
@@ -117,12 +118,13 @@ request(app)
   .expect('Content-Type', 'application/json; charset=utf-8')
   .expect(200)
   .end(function(err, res) {
-    console.log('------ TEST GET /api/anuncios?token=JWT (VALID token) ------');
+    console.group('------ TEST GET /api/anuncios?token=JWT (VALID token) ------');
     if (err) {
       console.log('*** ERROR => ', err.message);
     } else {
       console.log('*** RESULT => ', res.text);
     }
+    console.groupEnd();
   });
   
   //TEST /api/anuncios/:_id?token=JWT
@@ -131,12 +133,13 @@ request(app)
   .expect('Content-Type', 'application/json; charset=utf-8')
   .expect(200)
   .end(function(err, res) {
-    console.log('------ TEST GET /api/anuncios/:_id (NOT VALID :_id) ------');
+    console.group('------ TEST GET /api/anuncios/:_id (NOT VALID :_id) ------');
     if (err) {
       console.log('*** ERROR => ', err.message);
     } else {
       console.log('*** RESULT => ', res.text);
     }
+    console.groupEnd();
   });
   
   //Testing an existing _id
@@ -150,12 +153,13 @@ request(app)
         .expect('Content-Type', 'application/json; charset=utf-8')
         .expect(200)
         .end(function(err, res) {
-          console.log('------ TEST GET /api/anuncios/:_id (VALID :_id) ------');
+          console.group('------ TEST GET /api/anuncios/:_id (VALID :_id) ------');
           if (err) {
             console.log('*** ERROR => ', err.message);
           } else {
             console.log('*** RESULT => ', res.text);
           }
+          console.groupEnd();
         });
     } catch (err) {
       console.log('getOneAdvertisement() ERROR: ',err.message);
