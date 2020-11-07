@@ -101,32 +101,44 @@ function onListening() {
 var JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmE1MGEyN2RmMzI5MTRhZDM2ZTRhMGIiLCJpYXQiOjE2MDQ2Nzk3OTEsImV4cCI6MTYwNDg1MjU5MX0.CYShGzovVn04REhurUbNwjwmaefUBYjIyS2fjYCbvO4';
 
 //TEST /api/anuncios
+//without JWT
 request(app)
-  .get('/?token='+JWT)
-  .expect('Content-Type', 'text/html; charset=utf-8')
+  .get('/api/anuncios')
+  .expect('Content-Type', 'application/json; charset=utf-8')
   .expect(200)
   .end(function(err, res) {
+    console.log('------ TEST GET /api/anuncios (WHITHOUT token JWT) ------');
+    if (err) console.log('*** ERROR => ', err.message);
+});
+
+//with JWT
+request(app)
+  .get('/api/anuncios?token='+JWT)
+  .expect('Content-Type', 'application/json; charset=utf-8')
+  .expect(200)
+  .end(function(err, res) {
+    console.log('------ TEST GET /api/anuncios?token=JWT (VALID token) ------');
     if (err) {
-      console.log('Test get\(\'\/api\/anuncios\/\' ERROR -> ',err.message);
+      console.log('*** ERROR => ', err.message);
     } else {
-      console.log('Test get\(\'\/api\/anuncios\/\'): ', res.status);
+      console.log('*** RESULT => ', res.text);
     }
   });
-
+  
   //TEST /api/anuncios/:_id?token=JWT
-  //Testing a not existing _id
   request(app)
   .get('/api/anuncios/5fa50a26df32914ad36e4a10?token='+JWT)
   .expect('Content-Type', 'application/json; charset=utf-8')
   .expect(200)
   .end(function(err, res) {
+    console.log('------ TEST GET /api/anuncios/:_id (NOT VALID :_id) ------');
     if (err) {
-      console.log('Test NON EXISTING _id: get\(\'\/api\/anuncios\/:_id\' (:_id=5fa50a26df32914ad36e4a10) ERROR -> ',err.message);
+      console.log('*** ERROR => ', err.message);
     } else {
-      console.log('Test NON EXISTING _id: get\(\'\/api\/anuncios\/\/5fa50a26df32914ad36e4a10\'): ', res.text);
+      console.log('*** RESULT => ', res.text);
     }
   });
-
+  
   //Testing an existing _id
   getOneAdvertisement(); 
   
@@ -138,10 +150,11 @@ request(app)
         .expect('Content-Type', 'application/json; charset=utf-8')
         .expect(200)
         .end(function(err, res) {
+          console.log('------ TEST GET /api/anuncios/:_id (VALID :_id) ------');
           if (err) {
-            console.log(`Test EXISTING _id: get\(\'\/api\/anuncios\/:_id\' (:_id=${adv._id}) ERROR: ${err.message}`);
+            console.log('*** ERROR => ', err.message);
           } else {
-            console.log(`Test EXISTING _id: get\(\'\/api\/anuncios\/:_id\' (:_id=${adv._id}) STATUS ${res.text}`);
+            console.log('*** RESULT => ', res.text);
           }
         });
     } catch (err) {
