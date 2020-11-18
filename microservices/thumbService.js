@@ -24,7 +24,7 @@ async function thumbnail(path, folder, photo) {
         //read the image
         const image = await jimp.read(path+folder+photo);
         //resize the image 100x100
-        await image.resize(100, 100);
+        await image.scaleToFit(100, 100);
         //save the thumbnail
         await image.writeAsync(path+folder+'thumb_'+photo);
     } catch (err) {
