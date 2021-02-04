@@ -10,7 +10,7 @@
     "start": "pm2 reload ecosystem.config.js & cross-env NODE_ENV=production node ./bin/www",
     "dev": "pm2 reload ecosystem.config.js & cross-env DEBUG=nodepop-avanzado:* PORT=3000 NODE_ENV=development nodemon",
     "init-db": "node ./initDataBase.js",
-    "test": "cross-env DEBUG=nodepop-avanzado:* PORT=3000 NODE_ENV=development nodemon ./test/apiTest.js" 
+    "test": "cross-env DEBUG=nodepop-avanzado:* PORT=3000 NODE_ENV=development nodemon ./test/apiTest.js"
   },
   "dependencies": {
     "apidoc": "^0.25.0",

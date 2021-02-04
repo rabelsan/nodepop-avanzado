@@ -14,7 +14,7 @@ npm install @rabelsan\roman-decimal-converter
 ## Install
 
 ```sh
-npm install @rabelsan/nodepop-avanzado && pm2 reload ecosystem.config.js --env production
+
 ```
 
 ## Configure environment variables
