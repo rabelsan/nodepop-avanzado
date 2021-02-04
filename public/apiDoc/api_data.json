@@ -7,7 +7,7 @@
     "success": {
       "examples": [
         {
-          "title": "Success DELETE http://localhost:3000/api/anuncios/5f5b9b0df9d13e2d0907582c",
+          "title": "Success DELETE http://nodepop.rbsdevops.com/api/anuncios/5f5b9b0df9d13e2d0907582c",
           "content": "HTTP/1.1 200 OK",
           "type": "json"
         }
@@ -161,7 +161,7 @@
       },
       "examples": [
         {
-          "title": "Success  http://localhost:3000/api/anuncios?precio=13-&tag=trek%20gua&venta=false",
+          "title": "Success  http://nodepop.rbsdevops.com/api/anuncios?precio=13-&tag=trek%20gua&venta=false",
           "content": "HTTP/1.1 200 OK\n[{\n  \"sale\": true,\n    \"tags\": [\n      \"bicicletas\",\n      \"bycicles\",\n      \"trek\",\n      \"madone\"\n    ],\n  \"_id\": \"5f5a6ae91be10bf7d4a1956a\",\n  \"name\": \"Trek Madone SLR7\",\n  \"price\": 5800,\n  \"photo\": \"images/bike-trek-madone-SLR7.jpg\"\n}]",
           "type": "json"
         }
@@ -248,7 +248,7 @@
       },
       "examples": [
         {
-          "title": "Success  http://localhost:3000/5f5a6ae91be10bf7d4a1956a",
+          "title": "Success  http://nodepop.rbsdevops.com/5f5a6ae91be10bf7d4a1956a",
           "content": "HTTP/1.1 200 OK\n[{\n  \"sale\": true,\n    \"tags\": [\n      \"bicicletas\",\n      \"bycicles\",\n      \"trek\",\n      \"madone\"\n    ],\n  \"_id\": \"5f5a6ae91be10bf7d4a1956a\",\n  \"name\": \"Trek Madone SLR7\",\n  \"price\": 5800,\n  \"photo\": \"images/bike-trek-madone-SLR7.jpg\"\n}]",
           "type": "json"
         }
@@ -379,7 +379,7 @@
     "success": {
       "examples": [
         {
-          "title": "Success PUT http://localhost:3000/api/anuncios/5f5b9b0df9d13e2d0907582c body: { name: \"Casco NEGRO Dexter Proton Negan\" }",
+          "title": "Success PUT http://nodepop.rbsdevops.com/api/anuncios/5f5b9b0df9d13e2d0907582c body: { name: \"Casco NEGRO Dexter Proton Negan\" }",
           "content": " HTTP/1.1 200 OK\n \n{\n  \"result\": {\n      \"sale\": true,\n      \"tags\": [\n          \"casco\",\n          \"moto\"\n      ],\n      \"_id\": \"5f5b9b0df9d13e2d0907582c\",\n      \"name\": \"Casco NEGRO Dexter Proton Negan\",\n      \"price\": 60,\n      \"photo\": \"images/ad_27942a04-233f-428a-905a-a793d2c847d3_casco-Dexter-Proton-Negan.jpg\",\n      \"__v\": 0\n  }\n}",
           "type": "json"
         }
